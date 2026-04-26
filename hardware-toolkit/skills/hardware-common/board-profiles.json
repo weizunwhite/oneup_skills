@@ -1,0 +1,248 @@
+{
+  "_meta": {
+    "description": "开发板引脚配置与限制规则",
+    "version": "1.0.0"
+  },
+
+  "boards": {
+    "esp32_devkit": {
+      "display_name": "ESP32 DevKit V1",
+      "chip": "ESP32-WROOM-32",
+      "framework": "arduino",
+      "platformio_board": "esp32dev",
+      "voltage_logic": "3.3V",
+      "flash": "4MB",
+      "ram": "520KB",
+      "cpu_freq": "240MHz dual-core",
+      "uart_count": 3,
+      "i2c_count": 2,
+      "spi_count": 2,
+      "adc_resolution": 12,
+      "pwm_channels": 16,
+      "has_wifi": true,
+      "has_bluetooth": true,
+      "has_ble": true,
+      "usb_chip": "CP2102/CH340",
+      
+      "gpio_available": [2, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33, 34, 35, 36, 39],
+      "gpio_input_only": [34, 35, 36, 39],
+      "gpio_avoid": {
+        "6-11": "连接内部Flash, 不可使用",
+        "1": "TX0, 串口调试输出",
+        "3": "RX0, 串口调试输入"
+      },
+
+      "default_uart": {
+        "UART0": { "TX": 1, "RX": 3, "note": "USB调试串口, 一般不接外设" },
+        "UART1": { "TX": 17, "RX": 16, "note": "常用于外设通信" },
+        "UART2": { "TX": 17, "RX": 16, "note": "默认与UART1共享引脚, 可重映射" }
+      },
+      "default_i2c": {
+        "I2C0": { "SDA": 21, "SCL": 22 },
+        "I2C1": { "SDA": "可自定义", "SCL": "可自定义" }
+      },
+      "default_spi": {
+        "VSPI": { "MOSI": 23, "MISO": 19, "SCK": 18, "SS": 5 },
+        "HSPI": { "MOSI": 13, "MISO": 12, "SCK": 14, "SS": 15 }
+      },
+
+      "adc_pins": {
+        "ADC1": [32, 33, 34, 35, 36, 39],
+        "ADC2": [0, 2, 4, 12, 13, 14, 15, 25, 26, 27],
+        "note": "ADC2与WiFi冲突! 使用WiFi时只能用ADC1的引脚读模拟量"
+      },
+
+      "touch_pins": [0, 2, 4, 12, 13, 14, 15, 27, 32, 33],
+
+      "pin_conflicts": [
+        { "rule": "ADC2_WIFI", "description": "GPIO 0,2,4,12,13,14,15,25,26,27 在WiFi开启时不能用analogRead()", "severity": "error" },
+        { "rule": "GPIO12_BOOT", "description": "GPIO12 上拉会导致启动失败(MTDI引脚)", "severity": "warning" },
+        { "rule": "GPIO0_BOOT", "description": "GPIO0 低电平进入下载模式, 不要外接下拉", "severity": "warning" },
+        { "rule": "GPIO2_BOOT", "description": "GPIO2 启动时必须为低或浮空", "severity": "warning" },
+        { "rule": "STRAPPING", "description": "GPIO0,2,5,12,15 为Strapping引脚, 启动时电平有要求", "severity": "info" }
+      ],
+
+      "recommended_pin_groups": {
+        "safe_digital": [4, 5, 13, 14, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33],
+        "safe_analog": [32, 33, 34, 35, 36, 39],
+        "safe_pwm": [4, 5, 13, 14, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33],
+        "safe_interrupt": [4, 5, 13, 14, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33, 34, 35, 36, 39]
+      }
+    },
+
+    "esp32_s3": {
+      "display_name": "ESP32-S3 DevKitC",
+      "chip": "ESP32-S3-WROOM-1",
+      "framework": "arduino",
+      "platformio_board": "esp32-s3-devkitc-1",
+      "voltage_logic": "3.3V",
+      "flash": "8-16MB",
+      "ram": "512KB + 8MB PSRAM(可选)",
+      "cpu_freq": "240MHz dual-core",
+      "uart_count": 3,
+      "i2c_count": 2,
+      "spi_count": 2,
+      "adc_resolution": 12,
+      "pwm_channels": 8,
+      "has_wifi": true,
+      "has_bluetooth": false,
+      "has_ble": true,
+      "usb_chip": "原生USB(无需CH340)",
+
+      "gpio_available": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 21, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48],
+      "gpio_input_only": [],
+      "gpio_avoid": {
+        "19-20": "USB D- D+, 原生USB占用",
+        "26-32": "连接PSRAM(如果有), 不可用",
+        "33-37": "连接Octal SPI Flash(部分型号)"
+      },
+
+      "default_uart": {
+        "UART0": { "TX": 43, "RX": 44, "note": "USB调试串口" },
+        "UART1": { "TX": 17, "RX": 18, "note": "可自定义任意引脚" },
+        "UART2": { "TX": 15, "RX": 16, "note": "可自定义任意引脚" }
+      },
+      "default_i2c": {
+        "I2C0": { "SDA": 8, "SCL": 9 },
+        "I2C1": { "SDA": "可自定义", "SCL": "可自定义" }
+      },
+      "default_spi": {
+        "SPI2": { "MOSI": 11, "MISO": 13, "SCK": 12, "SS": 10 },
+        "SPI3": { "MOSI": "可自定义", "MISO": "可自定义", "SCK": "可自定义", "SS": "可自定义" }
+      },
+
+      "adc_pins": {
+        "ADC1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "ADC2": [11, 12, 13, 14, 15, 16, 17, 18],
+        "note": "S3的ADC2也与WiFi冲突, 建议使用ADC1"
+      },
+
+      "touch_pins": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+
+      "pin_conflicts": [
+        { "rule": "ADC2_WIFI", "description": "GPIO11-18 在WiFi开启时不能用analogRead()", "severity": "warning" },
+        { "rule": "USB_PINS", "description": "GPIO19-20 为USB引脚, 不可做他用", "severity": "error" },
+        { "rule": "PSRAM_PINS", "description": "GPIO26-32 连接PSRAM(如果有), 避免使用", "severity": "error" },
+        { "rule": "STRAPPING", "description": "GPIO0,3,45,46 为Strapping引脚", "severity": "info" },
+        { "rule": "RGB_LED", "description": "GPIO38 通常连接板载RGB LED(WS2812)", "severity": "info" }
+      ],
+
+      "advantages_over_devkit": [
+        "3个独立硬件串口(适合多串口外设如UWB)",
+        "原生USB调试(不占串口)",
+        "更多可用GPIO",
+        "支持USB Host模式",
+        "蓝牙5.0(BLE)"
+      ]
+    },
+
+    "arduino_nano": {
+      "display_name": "Arduino Nano",
+      "chip": "ATmega328P",
+      "framework": "arduino",
+      "platformio_board": "nanoatmega328",
+      "voltage_logic": "5V",
+      "flash": "32KB",
+      "ram": "2KB",
+      "cpu_freq": "16MHz",
+      "uart_count": 1,
+      "i2c_count": 1,
+      "spi_count": 1,
+      "adc_resolution": 10,
+      "pwm_channels": 6,
+      "has_wifi": false,
+      "has_bluetooth": false,
+      "has_ble": false,
+      "usb_chip": "CH340",
+
+      "gpio_available": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7"],
+      "gpio_input_only": ["A6", "A7"],
+      "gpio_avoid": {
+        "0": "RX, 串口通信",
+        "1": "TX, 串口通信",
+        "13": "板载LED, 可用但会闪"
+      },
+
+      "default_uart": {
+        "UART0": { "TX": 1, "RX": 0, "note": "唯一硬件串口, USB调试也用这个" }
+      },
+      "default_i2c": {
+        "I2C0": { "SDA": "A4", "SCL": "A5", "note": "固定引脚, A4A5不能做其他用途" }
+      },
+      "default_spi": {
+        "SPI0": { "MOSI": 11, "MISO": 12, "SCK": 13, "SS": 10 }
+      },
+
+      "adc_pins": {
+        "ADC": ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7"],
+        "note": "A4/A5与I2C共用; A6/A7只能做模拟输入"
+      },
+
+      "pwm_pins": [3, 5, 6, 9, 10, 11],
+
+      "pin_conflicts": [
+        { "rule": "I2C_ANALOG", "description": "A4/A5 用作I2C时不能读模拟量", "severity": "error" },
+        { "rule": "SPI_PINS", "description": "使用SPI设备时 D10-D13 被占用", "severity": "warning" },
+        { "rule": "SERIAL_USB", "description": "D0/D1 是串口, 上传程序时需断开外设", "severity": "warning" },
+        { "rule": "SOFTSERIAL_INTERRUPT", "description": "SoftwareSerial的RX必须是中断引脚(D2或D3)", "severity": "error" },
+        { "rule": "RAM_LIMIT", "description": "只有2KB RAM! 大字符串和数组会溢出", "severity": "warning" }
+      ],
+
+      "software_serial_notes": "只有1个硬件串口且被USB占用, 外设串口通信需SoftwareSerial(RX只能D2或D3); 高波特率(>57600)不稳定",
+
+      "limitations": [
+        "RAM极小(2KB), 不能存大数据",
+        "没有WiFi/蓝牙, 联网需外挂模块",
+        "只有1个硬串口, 多串口外设困难",
+        "5V逻辑电平, 接3.3V模块需电平转换",
+        "Flash只有32KB, 大程序可能放不下"
+      ],
+
+      "advantages": [
+        "5V逻辑电平, 直接驱动大部分传感器",
+        "库和教程最丰富",
+        "体积小, 成本低(~15元)",
+        "Arduino IDE直接支持, 新手友好",
+        "6个PWM引脚, 舵机/电机控制方便"
+      ]
+    },
+
+    "unihiker": {
+      "display_name": "行空板(Unihiker)",
+      "chip": "RK3308 ARM Cortex-A35",
+      "framework": "python",
+      "voltage_logic": "3.3V",
+      "flash": "16GB eMMC",
+      "ram": "512MB",
+      "cpu_freq": "1.2GHz quad-core",
+      "has_wifi": true,
+      "has_bluetooth": true,
+      "has_screen": true,
+      "screen_resolution": "240×320",
+      "has_usb": true,
+
+      "notes": "运行Linux+Python; 自带触摸屏; 支持USB摄像头; 有金手指GPIO接口; DFRobot生态; 适合AI视觉类项目(配合USB摄像头+OpenCV); 不适合实时硬件控制(延迟较高)",
+      "gpio_pins": ["P0", "P1", "P2", "P3", "P4", "P8", "P9", "P10", "P11", "P13", "P14", "P15", "P16", "P21", "P22", "P23", "P24"],
+
+      "used_in_projects": ["校园营养分析仪", "自动取药机(M10版本)"]
+    },
+
+    "raspberry_pi_4b": {
+      "display_name": "树莓派 4B",
+      "chip": "BCM2711 ARM Cortex-A72",
+      "framework": "python",
+      "voltage_logic": "3.3V",
+      "flash": "MicroSD",
+      "ram": "2/4/8GB",
+      "cpu_freq": "1.5GHz quad-core",
+      "has_wifi": true,
+      "has_bluetooth": true,
+      "has_usb": true,
+      "gpio_count": 40,
+
+      "notes": "完整Linux电脑; 适合计算机视觉(OpenCV+MediaPipe); GPIO电流驱动能力弱(max 16mA/pin); 需要5V/3A稳定供电; 不适合精确实时控制(用ESP32配合); 功耗约5W",
+
+      "used_in_projects": ["坐位体前屈"]
+    }
+  }
+}

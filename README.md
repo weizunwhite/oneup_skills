@@ -1,198 +1,129 @@
-# Zun Skills - Claude 自定义技能集
+# OneUp Skills — 零一优创 Claude Code 插件市场
 
-这是零一优创（One Up）的 Claude 自定义技能集，用于支持科技创新教育项目的教学和竞赛准备。
+零一优创（One Up）青少年科技创新教育配套的 Claude Code 插件市场，包含两个独立插件：竞赛材料生成工具集 + 硬件开发工具集。
 
-## 📦 包含的 Skills
+## 📦 包含的插件
 
-### 1. lesson-plan-generator（教案生成器）
-**功能**：基于标准化 8 阶段方法论生成科技创新项目课程的详细教案
+### 🎓 competition-toolkit — 青创赛/金鹏材料生成工具集
 
-**适用场景**：
-- 项目式学习课程设计
-- STEM 教育课程规划
-- 创客教育教案编写
-- 青少年科技创新大赛课程准备
+为参加全国青少年科技创新大赛、北京金鹏科技论坛等竞赛的师生和教练提供的一站式材料生成工具。
 
-**核心特性**：
-- 完整的 120 分钟课程结构（4-6 个教学环节）
-- 详细的教学目标（知识、能力、素养）
-- 具体的学生活动和教师话术
-- 常见问题与应对策略
-- 根据年级自动调整难度（小学/初中/高中）
+包含 10 个 skills：
 
-**触发关键词**：教案、课程设计、第 X 节课、lesson plan
+| Skill | 功能 |
+|-------|------|
+| `competition-paper-generator` | 生成竞赛论文/研究报告（Word，含图表照片） |
+| `tech-proposal-generator` | 生成项目技术方案文档 |
+| `project-research-log` | 生成研究日志（含补充材料清单） |
+| `presentation-generator` | 生成竞赛答辩 PPT |
+| `jinpeng-video-ppt` | 金鹏论坛视频专用 PPT + 视频脚本 |
+| `jinpeng-submission-organizer` | 检查并整理金鹏提交材料 |
+| `photo-checklist-generator` | 生成项目拍照清单 |
+| `research-material-templates` | 生成原始研究资料模板（手填或带内容版） |
+| `project-drawio-generator` | 生成项目架构图、流程图、统计图等 Draw.io 图表 |
+| `lesson-plan-generator` | 生成科技创新项目教案 |
 
----
+### 🔧 hardware-toolkit — Arduino / ESP32 硬件开发工具集
 
-### 2. project-research-log（项目研究日志生成器）
-**功能**：根据技术论文生成完整的项目研究日志，用于青少年科技竞赛材料准备
+为青少年科技项目硬件开发提供的工具集，覆盖 Arduino IDE、PlatformIO、ESP32 全栈开发。
 
-**适用场景**：
-- 全国青少年科技创新大赛
-- 北京金鹏科技论坛
-- 其他需要研究日志的科技竞赛
+包含 9 个 skills：
 
-**核心特性**：
-- 自动将论文"倒推"成逐日开发过程
-- 生成 15-30 条日志记录，跨度 3-8 个月
-- 每条记录包含：日期、内容、问题、解决方法、照片占位符、心得体会
-- 输出格式化 Word 文档
-- 符合竞赛评审要求
+| Skill | 功能 |
+|-------|------|
+| `hardware-common` | 硬件项目共享数据库（65+ 集成模块目录 + 开发板规格） |
+| `hardware-arduino-project` | 生成 Arduino IDE 项目脚手架 |
+| `hardware-platformio-project` | 生成 PlatformIO 项目脚手架 |
+| `hardware-sensor-library` | 生成传感器/模块驱动代码（.h/.cpp） |
+| `firmware-build-verify` | 固件编译、烧录、串口验证工作流 |
+| `embedded-systems-engineer` | 嵌入式系统资深工程师 agent |
+| `esp32-firmware-debugger` | ESP32 崩溃/通信/连接问题诊断 |
+| `edge-iot-integration` | IoT 端云架构与协议集成 |
+| `ino-to-mixly` | Arduino .ino 转 Mixly 2.0 .mix（图形化编程） |
 
-**触发关键词**：研究日志、填研究日志、青少年科技创新大赛、research log
+## 🚀 安装
 
----
+### 第一步：添加 marketplace
 
-### 3. tech-doc-generator（技术文档生成器）
-**功能**：生成完整的项目技术文档、竞赛论文和技术报告
+在 Claude Code 中执行：
 
-**适用场景**：
-- 科技竞赛参赛论文
-- 项目技术报告
-- 学术申报材料
-- 项目展示文档
+```
+/plugin marketplace add weizunwhite/oneup_skills
+```
 
-**核心特性**：
-- 支持硬件、软件、系统集成等多种项目类型
-- 根据年级调整文档复杂度和语言风格
-- 包含完整章节：摘要、背景、方法、实现、测试、创新点、结论
-- 自动生成图表说明和参考文献格式
-- 可输出 Markdown 或 Word 格式
+### 第二步：安装需要的插件
 
-**触发关键词**：项目文档、技术报告、学术论文、参赛材料、technical documentation
+```
+/plugin install competition-toolkit@oneup-edu
+/plugin install hardware-toolkit@oneup-edu
+```
 
----
+只装一个也可以，按需选择。
 
-## 🚀 快速开始
+## ♻️ 多机同步（推荐用法）
 
-### 方法一：通过 Claude.ai 界面导入
+如果你有多台开发机器，这个仓库是天然的 skills 同步盘：
 
-1. 登录 Claude.ai
-2. 进入 Settings → Skills
-3. 点击"导入 Skill"
-4. 上传对应的 skill 文件夹
+```
+机器 A: /plugin marketplace add weizunwhite/oneup_skills
+机器 A: /plugin install competition-toolkit@oneup-edu
+机器 A: /plugin install hardware-toolkit@oneup-edu
+机器 B: 同样三条命令
 
-### 方法二：克隆此仓库后手动导入
+# 之后任何一台机器修改 → push → 另一台 /plugin update
+```
+
+## 🔄 更新
+
+每次远程仓库有新版本：
+
+```
+/plugin update
+```
+
+## 🛠️ 给开发者：本地修改与发布流程
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/zun-skills.git
-cd zun-skills
+# 1. 克隆仓库
+git clone https://github.com/weizunwhite/oneup_skills.git
+cd oneup_skills
+
+# 2. 修改某个 skill
+vim competition-toolkit/skills/competition-paper-generator/SKILL.md
+
+# 3. 提交并推送
+git add -A
+git commit -m "improve: paper generator outline structure"
+git push
+
+# 4. 通知用户更新
+# 各机器执行 /plugin update 即可
 ```
 
-然后在 Claude.ai 中逐个上传三个文件夹。
-
-### 方法三：在 Claude 对话中直接导入
-
-1. 下载仓库压缩包
-2. 在 Claude 对话中上传文件
-3. 说："帮我安装这些 skills"
-
----
-
-## 📖 使用示例
-
-### 生成教案
-```
-你：帮我设计智能药盒项目的第1节课教案，初中生，一对一授课
-Claude：[自动触发 lesson-plan-generator，生成完整教案]
-```
-
-### 生成研究日志
-```
-你：根据这篇智能书包的论文，帮我生成研究日志
-Claude：[自动触发 project-research-log，分析论文并生成日志]
-```
-
-### 生成技术文档
-```
-你：帮我写一份智能火灾报警器的参赛论文，高中组
-Claude：[自动触发 tech-doc-generator，生成完整论文]
-```
-
----
-
-## 📁 文件结构
+### 仓库结构
 
 ```
-zun-skills/
-├── README.md                           # 本文件
-├── lesson-plan-generator/
-│   ├── SKILL.md                        # Skill 主配置
-│   └── references/                     # 参考资料
-│       ├── methodology.md              # 8阶段方法论
-│       ├── templates.md                # 教案模板
-│       └── example-lesson1.md          # 示例教案
-│
-├── project-research-log/
-│   ├── SKILL.md
-│   ├── references/
-│   │   └── paper_analysis.md           # 论文分析方法
-│   └── scripts/
-│       └── generate_log.py             # Word 生成脚本
-│
-└── tech-doc-generator/
-    ├── SKILL.md
-    └── references/
-        ├── document-structures.md      # 文档结构模板
-        ├── examples.md                 # 优秀案例
-        └── chinese-templates.md        # 中文技术写作模板
+oneup_skills/
+├── .claude-plugin/
+│   └── marketplace.json          ← marketplace 总入口
+├── competition-toolkit/
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   └── skills/
+│       ├── competition-paper-generator/
+│       ├── tech-proposal-generator/
+│       └── ...
+├── hardware-toolkit/
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   └── skills/
+│       ├── hardware-common/
+│       ├── hardware-arduino-project/
+│       └── ...
+├── LICENSE
+└── README.md
 ```
 
----
+## 📜 License
 
-## 🔧 自定义和修改
-
-所有 skills 都可以根据你的需求自由修改：
-
-1. **修改触发条件**：编辑 `SKILL.md` 中的 `description` 字段
-2. **调整生成逻辑**：修改 `SKILL.md` 中的工作流程描述
-3. **更新模板**：编辑 `references/` 文件夹中的模板文件
-4. **添加新功能**：在 `SKILL.md` 中添加新的步骤和指令
-
----
-
-## 🎯 适用对象
-
-- **教育机构**：科技创新教育培训机构
-- **学校老师**：STEM、创客、科技课程教师
-- **竞赛辅导员**：青少年科技竞赛指导老师
-- **学生**：参加科技创新竞赛的中小学生
-- **家长**：辅导孩子参加科技竞赛的家长
-
----
-
-## 🏢 关于零一优创（One Up）
-
-零一优创是一家专注于青少年科技创新教育的公司，提供：
-- **B2B 业务**：与学校合作的 20 小时科创课程
-- **B2C 业务**：一对一学生辅导（24-30 小时）
-- **竞赛辅导**：全国青少年科技创新大赛、金鹏科技论坛等
-
-**教学理念**：以科创为体，以 AI 为手
-学生是创造者，而非观察者
-
----
-
-## 📄 许可证
-
-MIT License
-
----
-
-## 🤝 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-如有问题或建议，请联系：
-- 邮箱：wei@oneup.tech
-- 公司：零一优创（One Up）
-
----
-
-## 📝 更新日志
-
-### v1.0.0 (2025-01-27)
-- 初始版本
-- 包含三个核心 skills：lesson-plan-generator、project-research-log、tech-doc-generator
-- 支持小学、初中、高中三个年级段
-- 支持硬件、软件、系统集成等多种项目类型
+MIT

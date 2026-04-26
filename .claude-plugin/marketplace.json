@@ -1,0 +1,30 @@
+{
+  "name": "oneup-edu",
+  "owner": {
+    "name": "Wei (One Up)",
+    "email": "wei704102871@gmail.com",
+    "url": "https://github.com/weizunwhite"
+  },
+  "metadata": {
+    "description": "零一优创（One Up）青少年科技创新教育插件市场 — 竞赛材料生成 + 硬件开发工具集",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "competition-toolkit",
+      "source": "./competition-toolkit",
+      "description": "青创赛和金鹏科技论坛竞赛材料一键生成工具集：论文、技术方案、研究日志、PPT、视频脚本、原始资料模板、照片清单、教案、架构图等。",
+      "version": "1.0.0",
+      "category": "education",
+      "keywords": ["青创赛", "金鹏", "竞赛", "论文", "教案", "PPT", "STEM", "education"]
+    },
+    {
+      "name": "hardware-toolkit",
+      "source": "./hardware-toolkit",
+      "description": "Arduino / ESP32 / PlatformIO 硬件项目开发工具集：项目脚手架、传感器库、固件编译验证、ESP32 调试、IoT 集成、嵌入式工程师 agent、ino 转 Mixly。",
+      "version": "1.0.0",
+      "category": "hardware",
+      "keywords": ["arduino", "esp32", "platformio", "firmware", "iot", "embedded", "mixly"]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "competition-toolkit",
+  "version": "1.0.0",
+  "description": "青创赛和金鹏科技论坛竞赛材料一键生成工具集",
+  "author": {
+    "name": "Wei (One Up)",
+    "email": "wei704102871@gmail.com",
+    "url": "https://github.com/weizunwhite"
+  },
+  "homepage": "https://github.com/weizunwhite/oneup_skills",
+  "repository": "https://github.com/weizunwhite/oneup_skills",
+  "license": "MIT",
+  "keywords": ["青创赛", "金鹏", "竞赛", "论文", "教案", "PPT", "STEM", "education", "youth"]
+}

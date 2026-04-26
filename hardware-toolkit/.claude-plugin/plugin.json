@@ -1,0 +1,14 @@
+{
+  "name": "hardware-toolkit",
+  "version": "1.0.0",
+  "description": "Arduino / ESP32 / PlatformIO 硬件项目开发工具集",
+  "author": {
+    "name": "Wei (One Up)",
+    "email": "wei704102871@gmail.com",
+    "url": "https://github.com/weizunwhite"
+  },
+  "homepage": "https://github.com/weizunwhite/oneup_skills",
+  "repository": "https://github.com/weizunwhite/oneup_skills",
+  "license": "MIT",
+  "keywords": ["arduino", "esp32", "platformio", "firmware", "iot", "embedded", "mixly", "hardware"]
+}

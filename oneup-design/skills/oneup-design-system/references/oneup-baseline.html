@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零一优创 · One Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Noto+Serif+SC:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* 暖色版：深咖 + 焦糖橙 + 米色 */
+            --primary-navy: #2d1810;        /* 深咖（替代海军蓝） */
+            --primary-light: #3d2817;
+            --gold: #c97f4a;                /* 焦糖橙（替代冷金） */
+            --gold-light: #e0a070;
+            --bg-white: #fdfaf4;            /* 暖米白（替代纯白） */
+            --bg-offwhite: #f5efe4;         /* 米色背景（替代冷灰） */
+            --text-dark: #2d1810;
+            --text-light: #7a6553;          /* 暖灰文字 */
+
+            --font-serif-en: 'Cormorant Garamond', serif;
+            --font-serif-cn: 'Noto Serif SC', serif;
+            --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 { font-family: var(--font-serif-cn); font-weight: 500; }
+        .serif-en { font-family: var(--font-serif-en); }
+
+        /* 动画 */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* 顶部导航 */
+        .top-bar { background: var(--primary-navy); color: white; text-align: center; padding: 8px; font-size: 0.85rem; letter-spacing: 2px; }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid rgba(180, 151, 90, 0.2);
+        }
+        .logo { text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+        .logo .logo-cn { font-family: var(--font-serif-cn); font-size: 1.6rem; font-weight: 700; color: var(--primary-navy); letter-spacing: 2px; }
+        .logo .logo-en { font-family: var(--font-serif-en); font-size: 0.85rem; letter-spacing: 4px; color: var(--gold); margin-top: 4px; font-style: italic; }
+
+        .nav-links { display: flex; gap: 36px; }
+        .nav-links a { color: var(--primary-navy); text-decoration: none; font-size: 0.95rem; letter-spacing: 1.5px; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-gold { border: 1px solid var(--gold); background: transparent; color: var(--gold); padding: 10px 24px; font-family: var(--font-sans); font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
+        .btn-gold:hover { background: var(--gold); color: white; }
+
+        /* Hero */
+        .hero {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 140px 5%;
+            text-align: center;
+            position: relative;
+            background-image: linear-gradient(rgba(10, 25, 47, 0.88), rgba(10, 25, 47, 0.95)), url('https://picsum.photos/seed/workshop2025/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 60px; background: var(--gold); }
+        .hero-tag { color: var(--gold); font-family: var(--font-serif-en); font-size: 1rem; letter-spacing: 5px; margin-bottom: 24px; display: block; font-style: italic; }
+        .hero h1 { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 500; line-height: 1.4; margin-bottom: 32px; letter-spacing: 4px; }
+        .hero h1 .highlight { color: var(--gold-light); border-bottom: 1px solid rgba(180, 151, 90, 0.5); padding-bottom: 4px;}
+        .hero p { font-size: 1.1rem; font-weight: 300; max-width: 720px; margin: 0 auto 48px; opacity: 0.85; line-height: 2; letter-spacing: 1px; }
+        .btn-solid-gold { background: var(--gold); color: var(--primary-navy); border: none; padding: 16px 44px; font-family: var(--font-sans); letter-spacing: 3px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.95rem;}
+        .btn-solid-gold:hover { background: var(--gold-light); }
+
+        /* 通用区块 */
+        section { padding: 110px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-en-tag { color: var(--gold); font-family: var(--font-serif-en); font-style: italic; font-size: 1rem; letter-spacing: 4px; margin-bottom: 12px; display: block;}
+        .section-header h2 { font-size: 2.4rem; color: var(--primary-navy); margin-bottom: 18px; letter-spacing: 4px; }
+        .divider { width: 60px; height: 1px; background: var(--gold); margin: 24px auto; }
+        .section-desc { color: var(--text-light); max-width: 640px; margin: 0 auto; font-size: 1rem; line-height: 2; }
+
+        /* 教学理念 */
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; text-align: center; }
+        .pillar-icon { width: 72px; height: 72px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: var(--gold); }
+        .pillar h3 { font-size: 1.4rem; color: var(--primary-navy); margin-bottom: 16px; letter-spacing: 2px; }
+        .pillar .pillar-en { font-family: var(--font-serif-en); font-style: italic; color: var(--gold); font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+        .pillar p { color: var(--text-light); font-size: 0.95rem; line-height: 2; }
+
+        /* 项目展示 */
+        .bg-gray { background-color: var(--bg-offwhite); padding: 110px 0; max-width: 100%; }
+        .cases-grid { max-width: 1200px; margin: 0 auto; display: grid; gap: 60px; padding: 0 5%; }
+        .case-card { display: flex; align-items: center; gap: 60px; background: white; padding: 50px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 40px rgba(10, 25, 47, 0.06); }
+        .case-card:nth-child(even) { flex-direction: row-reverse; }
+        .case-img { flex: 1; border: 4px double rgba(180, 151, 90, 0.4); padding: 12px; }
+        .case-img img { width: 100%; height: auto; display: block; filter: sepia(0.08); }
+        .case-content { flex: 1; }
+        .case-meta { color: var(--gold); font-family: var(--font-serif-en); font-style: italic; font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 16px; display: block; }
+        .case-content h3 { font-size: 1.8rem; color: var(--primary-navy); margin-bottom: 18px; line-height: 1.4; letter-spacing: 1px; }
+        .case-content > p { color: var(--text-light); margin-bottom: 24px; line-height: 2; }
+        .case-stats { display: flex; gap: 28px; margin: 20px 0; flex-wrap: wrap; }
+        .stat-item { border-left: 2px solid var(--gold); padding-left: 12px; }
+        .stat-item .num { font-family: var(--font-serif-en); font-size: 1.5rem; color: var(--primary-navy); font-weight: 700; }
+        .stat-item .label { font-size: 0.8rem; color: var(--text-light); letter-spacing: 1px; }
+        .award-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; padding: 6px 14px; background: rgba(180, 151, 90, 0.1); color: var(--primary-navy); border: 1px solid rgba(180, 151, 90, 0.3); letter-spacing: 1px; }
+
+        .more-projects { text-align: center; margin-top: 60px; }
+
+        /* 课程 */
+        .courses-section h2 { color: var(--primary-navy);}
+        .courses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .course-card { padding: 40px; border: 1px solid #eee; transition: all 0.3s; cursor: pointer; }
+        .course-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(10, 25, 47, 0.06); transform: translateY(-4px); }
+        .course-tag { color: var(--gold); font-family: var(--font-serif-en); font-style: italic; font-size: 0.9rem; letter-spacing: 2px;}
+        .course-card h3 { font-size: 1.6rem; color: var(--primary-navy); margin: 12px 0 16px; }
+        .course-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.9; margin-bottom: 20px;}
+        .course-meta { display: flex; gap: 20px; font-size: 0.85rem; color: var(--text-light); letter-spacing: 1px;}
+
+        /* 资源 */
+        .resources-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .resource-box { border-top: 2px solid var(--primary-navy); padding-top: 30px; }
+        .resource-box h3 { font-size: 1.4rem; color: var(--primary-navy); margin-bottom: 24px; letter-spacing: 2px;}
+        .resource-list { list-style: none; }
+        .resource-list li { border-bottom: 1px solid #eee; padding: 22px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+        .resource-list li:last-child { border-bottom: none; }
+        .r-title { font-weight: 500; color: var(--primary-navy); font-size: 1.05rem; letter-spacing: 1px; }
+        .r-desc { color: var(--text-light); font-size: 0.9rem; margin-top: 6px; line-height: 1.7;}
+        .r-link { color: var(--gold); text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; white-space: nowrap; padding-top: 4px; }
+        .r-link:hover { color: var(--gold-light); }
+
+        /* 创始人 */
+        .director-section { display: flex; align-items: center; gap: 60px; padding: 80px 5%; background: white; border: 1px solid var(--gold); position: relative; max-width: 1100px; margin: 0 auto; }
+        .director-img { width: 320px; height: 420px; object-fit: cover; border: 1px solid #eee; flex-shrink: 0; }
+        .director-content h2 { font-size: 2.2rem; color: var(--primary-navy); margin-bottom: 6px; letter-spacing: 3px;}
+        .director-title { color: var(--gold); font-family: var(--font-serif-en); font-style: italic; font-size: 1.1rem; margin-bottom: 28px; display: block; letter-spacing: 2px;}
+        .director-quote { font-family: var(--font-serif-cn); font-size: 1.3rem; color: var(--primary-navy); line-height: 1.8; margin-bottom: 24px; padding-left: 24px; border-left: 3px solid var(--gold); letter-spacing: 1px;}
+        .director-content > p { color: var(--text-light); line-height: 2; font-size: 0.98rem;}
+
+        /* Footer CTA */
+        .footer-cta { background: var(--primary-navy); color: white; text-align: center; padding: 110px 5%; }
+        .footer-cta .section-en-tag { color: var(--gold); }
+        .footer-cta h2 { font-size: 2.4rem; margin-bottom: 18px; color: white; letter-spacing: 4px;}
+        .footer-cta p { font-size: 1.05rem; max-width: 640px; margin: 0 auto 40px; opacity: 0.85; line-height: 2;}
+
+        /* 真页脚 */
+        footer.real-footer { background: #050d1a; color: rgba(255,255,255,0.5); text-align: center; padding: 30px 5%; font-size: 0.85rem; letter-spacing: 1px;}
+
+        @media (max-width: 900px) {
+            .nav-links, nav .btn-gold { display: none; }
+            .pillars, .resources-layout, .courses-grid { grid-template-columns: 1fr; }
+            .case-card, .case-card:nth-child(even), .director-section { flex-direction: column; text-align: center; padding: 30px; gap: 30px;}
+            .director-quote { border-left: none; padding-left: 0; }
+            .director-img { width: 100%; max-width: 280px; height: auto; }
+            .case-img { padding: 5px; }
+            .case-stats { justify-content: center; }
+            .stat-item { border-left: none; border-top: 2px solid var(--gold); padding-left: 0; padding-top: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">— 专注青少年科技创新竞赛深度辅导 —</div>
+
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-cn">零一优创</div>
+            <div class="logo-en">One Up · Est. 2024</div>
+        </a>
+        <div class="nav-links">
+            <a href="#philosophy">教学理念</a>
+            <a href="#cases">学生项目</a>
+            <a href="#courses">免费课程</a>
+            <a href="#resources">资源分享</a>
+            <a href="#director">关于创始人</a>
+        </div>
+        <button class="btn-gold">预约咨询</button>
+    </nav>
+
+    <header class="hero fade-up">
+        <span class="hero-tag">Where Real Things Are Built</span>
+        <h1>以科创为<span class="highlight">体</span>，以 AI 为<span class="highlight">手</span></h1>
+        <p>我们辅导 1-9 年级的孩子做出真正属于自己的科技作品。从一颗螺丝到一行代码，从立项到答辩，每一步都由学生本人完成。AI 只是手中的工具，不是替代他们思考的人。</p>
+        <button class="btn-solid-gold">预约一次深度沟通</button>
+    </header>
+
+    <section id="philosophy" class="fade-up">
+        <div class="section-header">
+            <span class="section-en-tag">Our Philosophy</span>
+            <h2>教 学 理 念</h2>
+            <div class="divider"></div>
+            <p class="section-desc">真实地做一件事，比拿一张奖状更重要。我们相信，孩子在 AI 时代最该被培养的，是用工具去创造的能力 —— 而不是被工具替代的焦虑。</p>
+        </div>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="pillar-icon"><i data-lucide="hammer"></i></div>
+                <span class="pillar-en">Real Hands-On</span>
+                <h3>动手做真实的东西</h3>
+                <p>每一个学生项目都是从真实生活中找到的问题出发：独居老人的安全、渐冻人的呼叫、老旧小区的消防隐患。不是为比赛而做，而是真的在解决一件事。</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon"><i data-lucide="cpu"></i></div>
+                <span class="pillar-en">AI as a Tool</span>
+                <h3>把 AI 当成工具</h3>
+                <p>我们教孩子使用 ChatGPT、Claude、Cursor 这些专业工具，但教的不是依赖 —— 是如何提问、如何判断、如何决策。AI 是杠杆，不是答案本身。</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon"><i data-lucide="user-check"></i></div>
+                <span class="pillar-en">Full Ownership</span>
+                <h3>项目主权属于学生</h3>
+                <p>代码学生写，硬件学生焊，论文学生改。老师只在他们卡住时给出方向。答辩席上能讲明白每一个细节的孩子，靠的不是包装，是真的做过。</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-gray" id="cases">
+        <div class="section-header fade-up">
+            <span class="section-en-tag">Selected Student Works</span>
+            <h2>学 生 项 目</h2>
+            <div class="divider"></div>
+            <p class="section-desc">以下是我们指导的真实学生项目。每一个背后都是数月的反复试错、迭代和打磨。</p>
+        </div>
+        <div class="cases-grid">
+
+            <div class="case-card fade-up">
+                <div class="case-img">
+                    <img src="https://picsum.photos/seed/medicine-cabinet/800/600" alt="医院自动取药系统">
+                </div>
+                <div class="case-content">
+                    <span class="case-meta">边缘 AI · 计算机视觉 · 初中组</span>
+                    <h3>基于边缘 AI 视觉识别的医院自动取药系统</h3>
+                    <p>这位同学用 4 个月时间，做了一台可以"自己看懂药品"的取药柜。系统采用行空板 + ESP32 的双控制器架构，本地 ONNX 模型离线推理，XY 滑台精确定位 —— 整个 AI 识别方案从云端 API 迭代到本地推理，经历了三次完整重构。</p>
+                    <div class="case-stats">
+                        <div class="stat-item"><div class="num">4</div><div class="label">个月研发</div></div>
+                        <div class="stat-item"><div class="num">12</div><div class="label">个硬件模块</div></div>
+                        <div class="stat-item"><div class="num">2000+</div><div class="label">张过程照片</div></div>
+                    </div>
+                    <div class="award-badge"><i data-lucide="medal" style="width:14px;height:14px"></i> 北京金鹏科技论坛 入围</div>
+                </div>
+            </div>
+
+            <div class="case-card fade-up">
+                <div class="case-img">
+                    <img src="https://picsum.photos/seed/water-monitor/800/600" alt="独居老人用水监测">
+                </div>
+                <div class="case-content">
+                    <span class="case-meta">物联网 · 公益关怀 · 小学高段</span>
+                    <h3>以水知安 · 独居老人用水监测系统</h3>
+                    <p>四年级的洪同学注意到自己的爷爷奶奶独居在家，他想到一个温柔的办法：通过监测家中水龙头的使用频率，推断老人是否正常起居。如果一整天没有用水，系统就会向家人发出提醒。这不是冰冷的科技，这是孙子写给爷爷的一行代码。</p>
+                    <div class="case-stats">
+                        <div class="stat-item"><div class="num">4</div><div class="label">年级</div></div>
+                        <div class="stat-item"><div class="num">3</div><div class="label">次方案迭代</div></div>
+                        <div class="stat-item"><div class="num">327</div><div class="label">张过程照片</div></div>
+                    </div>
+                    <div class="award-badge"><i data-lucide="heart" style="width:14px;height:14px"></i> 关注独居老人安全</div>
+                </div>
+            </div>
+
+            <div class="case-card fade-up">
+                <div class="case-img">
+                    <img src="https://picsum.photos/seed/als-caller/800/600" alt="渐冻人看护呼叫器">
+                </div>
+                <div class="case-content">
+                    <span class="case-meta">医疗辅具 · 包容性设计 · 初中组</span>
+                    <h3>渐冻人看护呼叫器</h3>
+                    <p>这个项目缘起于学生在公益活动中遇到的一位渐冻症患者。她无法操作普通的呼叫按钮。学生用 3D 打印自己设计了一个机械结构，让患者只需极小幅度的肌肉动作就能触发呼叫。完整的设计笔记和原型测试，他用手写日记记录了 1100+ 张照片。</p>
+                    <div class="case-stats">
+                        <div class="stat-item"><div class="num">1100+</div><div class="label">张过程记录</div></div>
+                        <div class="stat-item"><div class="num">5</div><div class="label">代 3D 打印迭代</div></div>
+                        <div class="stat-item"><div class="num">手写</div><div class="label">设计日记</div></div>
+                    </div>
+                    <div class="award-badge"><i data-lucide="medal" style="width:14px;height:14px"></i> 北京金鹏科技论坛 入围</div>
+                </div>
+            </div>
+
+            <div class="case-card fade-up">
+                <div class="case-img">
+                    <img src="https://picsum.photos/seed/sit-reach/800/600" alt="智能坐位体前屈">
+                </div>
+                <div class="case-content">
+                    <span class="case-meta">计算机视觉 · 体育教育 · 7 年级</span>
+                    <h3>基于计算机视觉与传感器融合的智能坐位体前屈系统</h3>
+                    <p>七年级的同学注意到中考体育的体前屈项目人工判定误差很大。他用 MediaPipe 做姿态检测，加上距离传感器双重校验，自动判定测试是否有效 —— 让评分更公平。这是一个"用技术让一件小事更公正"的好例子。</p>
+                    <div class="case-stats">
+                        <div class="stat-item"><div class="num">7</div><div class="label">年级</div></div>
+                        <div class="stat-item"><div class="num">MediaPipe</div><div class="label">姿态检测</div></div>
+                        <div class="stat-item"><div class="num">双</div><div class="label">传感器融合</div></div>
+                    </div>
+                    <div class="award-badge"><i data-lucide="medal" style="width:14px;height:14px"></i> 北京市赛 入围</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="more-projects">
+            <button class="btn-gold">查看全部项目 →</button>
+        </div>
+    </div>
+
+    <section id="courses" class="fade-up courses-section">
+        <div class="section-header">
+            <span class="section-en-tag">Free Curriculum</span>
+            <h2>免 费 课 程</h2>
+            <div class="divider"></div>
+            <p class="section-desc">我们引进国外优质 AI 课程并翻译成中文，向所有家庭免费开放。优秀的教育资源，不该被语言挡在门外。</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card">
+                <span class="course-tag">MIT · 引进</span>
+                <h3>Day of AI · 中文版</h3>
+                <p>由麻省理工学院专为中小学生设计的 AI 启蒙课程。我们正在把它本地化，包含完整教案、互动工具和动手项目。让孩子在一天之内理解什么是真正的 AI。</p>
+                <div class="course-meta">
+                    <span>· 适用 K-9</span>
+                    <span>· 全套中文化</span>
+                    <span>· 公益开放</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <span class="course-tag">Coming Soon</span>
+                <h3>更多课程陆续上线</h3>
+                <p>我们正在筛选更多国外优质 AI 与科创课程，包括 Stanford CS Education 系列、Google AI for Anyone 等。如果你是教育者，欢迎联系我们共建。</p>
+                <div class="course-meta">
+                    <span>· 持续更新</span>
+                    <span>· 欢迎共建</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="fade-up">
+        <div class="section-header">
+            <span class="section-en-tag">Toolkit & Resources</span>
+            <h2>资 源 分 享</h2>
+            <div class="divider"></div>
+            <p class="section-desc">我们日常使用并推荐的 AI 工具、教学资源、自研脚本 —— 持续更新。</p>
+        </div>
+        <div class="resources-layout">
+            <div class="resource-box">
+                <h3>AI 工具推荐</h3>
+                <ul class="resource-list">
+                    <li>
+                        <div>
+                            <div class="r-title">Claude Code</div>
+                            <div class="r-desc">最适合中小学生学习编程的 AI 助手，命令行工具，能直接读写代码、调试。</div>
+                        </div>
+                        <a href="#" class="r-link">了解 →</a>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="r-title">Cursor</div>
+                            <div class="r-desc">AI 优先的代码编辑器。我们为低龄学生定制了简化配置脚本。</div>
+                        </div>
+                        <a href="#" class="r-link">了解 →</a>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="r-title">v0 · Lovable</div>
+                            <div class="r-desc">让孩子用一句话描述想法，就能生成完整网站的 AI 工具。</div>
+                        </div>
+                        <a href="#" class="r-link">了解 →</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="resource-box">
+                <h3>自研工具集</h3>
+                <ul class="resource-list">
+                    <li>
+                        <div>
+                            <div class="r-title">OneUp Skills</div>
+                            <div class="r-desc">我们开源的 Claude Code 插件包，覆盖竞赛材料生成、Arduino/ESP32 工作流。</div>
+                        </div>
+                        <a href="https://github.com/weizunwhite/oneup_skills" target="_blank" class="r-link">GitHub →</a>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="r-title">硬件采购清单</div>
+                            <div class="r-desc">我们多年踩坑后整理出的高性价比硬件清单，含 ESP32 / Arduino / 各类传感器。</div>
+                        </div>
+                        <a href="#" class="r-link">查看 →</a>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="r-title">竞赛选题指南</div>
+                            <div class="r-desc">青创赛、金鹏论坛历年优秀项目分析与选题建议。</div>
+                        </div>
+                        <a href="#" class="r-link">下载 →</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="director" class="fade-up" style="padding-bottom: 110px;">
+        <div class="director-section">
+            <img src="https://picsum.photos/seed/wei-portrait/600/800" alt="创始人 Wei" class="director-img">
+            <div class="director-content">
+                <h2>Wei</h2>
+                <span class="director-title">Founder · 创始人</span>
+                <div class="director-quote">
+                    "AI 时代，孩子最该被保护的不是分数，是动手做事的能力。"
+                </div>
+                <p>零一优创创始人。从北京到全国，多年扎根在青少年科创教育一线，亲手指导过几十个学生作品落地。坚持一个朴素的信念：教育不是替孩子扫清障碍，而是让他们自己学会跨越障碍 —— 在这个过程中，AI 是最好的副手。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-cta fade-up">
+        <span class="section-en-tag">Let's Talk</span>
+        <h2>开 始 一 段 对 话</h2>
+        <div class="divider" style="background: var(--gold);"></div>
+        <p>我们每学期只接收有限名额。如果你正在为孩子寻找一个真正能把作品做出来的辅导者，欢迎添加我的微信，做一次深度沟通。不推销，只交流。</p>
+        <button class="btn-solid-gold" style="background: white; color: var(--primary-navy);">添加微信 · Wei</button>
+    </footer>
+
+    <footer class="real-footer">
+        © 2026 零一优创 One Up · 京 ICP 备 XXXXXXXX 号
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.fade-up').forEach(elem => observer.observe(elem));
+    </script>
+</body>
+</html>

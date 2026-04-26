@@ -1,6 +1,6 @@
 # OneUp Skills — 零一优创 Claude Code 插件市场
 
-零一优创（One Up）青少年科技创新教育配套的 Claude Code 插件市场，包含两个独立插件：竞赛材料生成工具集 + 硬件开发工具集。
+零一优创（One Up）青少年科技创新教育配套的 Claude Code 插件市场，包含三个独立插件：竞赛材料生成工具集 + 硬件开发工具集 + 品牌设计系统。
 
 ## 📦 包含的插件
 
@@ -41,6 +41,23 @@
 | `edge-iot-integration` | IoT 端云架构与协议集成 |
 | `ino-to-mixly` | Arduino .ino 转 Mixly 2.0 .mix（图形化编程） |
 
+### 🎨 oneup-design — 品牌设计系统
+
+零一优创官方视觉规范包。为公司开发任何网站、UI、PPT、营销物料前先安装此插件，确保视觉语言统一。
+
+包含 1 个 skill 和完整的设计资产：
+
+| 资产 | 用途 |
+|------|------|
+| `oneup-design-system` (SKILL.md) | 给 AI 看的规范文档（颜色、字体、组件、文案语气） |
+| `tokens/tokens.css` | CSS 变量，可直接 `@import` 到任何项目 |
+| `tokens/tokens.json` | JSON tokens，给 Tailwind / Sanity 等工具消费 |
+| `references/oneup-baseline.html` | 基线 HTML 实现，**视觉对照标准** |
+| `references/real-projects.md` | 真实学生项目数据库 |
+
+**核心配色**：深咖 `#2d1810` + 焦糖橙 `#c97f4a` + 暖米白 `#fdfaf4`
+**核心标语**：以科创为体，以 AI 为手 / Where Real Things Are Built
+
 ## 🚀 安装
 
 ### 第一步：添加 marketplace
@@ -56,6 +73,7 @@
 ```
 /plugin install competition-toolkit@oneup-edu
 /plugin install hardware-toolkit@oneup-edu
+/plugin install oneup-design@oneup-edu
 ```
 
 只装一个也可以，按需选择。

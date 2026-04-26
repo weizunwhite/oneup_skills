@@ -1,0 +1,128 @@
+/* ============================================================
+ * 零一优创 OneUp · 设计 Token (CSS Variables)
+ * 版本 1.0.0 · 暖色版基线
+ * 任何使用本设计系统的项目都应 @import 这个文件
+ * ============================================================ */
+
+:root {
+  /* ====== 颜色 · 主色系 ====== */
+  --oneup-brown-darkest: #2d1810;       /* 深咖（主深色，hero、文字、CTA 背景） */
+  --oneup-brown-dark:    #3d2817;       /* 深咖辅助（容器、二级深色） */
+  --oneup-brown-medium:  #5c3a26;       /* 中棕（暂留备用） */
+  --oneup-brown-light:   #7a6553;       /* 暖灰（次级文字） */
+
+  /* ====== 颜色 · 强调色 ====== */
+  --oneup-orange-deep:   #a85d2c;       /* 深焦糖（hover 态、备用） */
+  --oneup-orange:        #c97f4a;       /* 焦糖橙（主要强调色） */
+  --oneup-orange-light:  #e0a070;       /* 浅焦糖（hover 后的 lighter） */
+  --oneup-orange-tint:   rgba(201, 127, 74, 0.1);   /* 强调色 10% 蒙版 */
+  --oneup-orange-line:   rgba(201, 127, 74, 0.4);   /* 强调色细线 */
+
+  /* ====== 颜色 · 中性 ====== */
+  --oneup-bg-primary:    #fdfaf4;       /* 暖米白（主背景） */
+  --oneup-bg-secondary:  #f5efe4;       /* 米色（次背景，section 间隔） */
+  --oneup-bg-card:       #ffffff;       /* 卡片背景（纯白比米色亮一点用于卡片） */
+  --oneup-text-primary:  #2d1810;       /* 正文（=深咖） */
+  --oneup-text-secondary:#7a6553;       /* 次要文字 */
+  --oneup-text-muted:    rgba(45, 24, 16, 0.5);   /* 弱化文字 */
+  --oneup-divider:       #e8dcc9;       /* 分隔线 */
+  --oneup-border:        #eee6d8;       /* 卡片边框 */
+
+  /* ====== 颜色 · 状态（罕用，谨慎使用） ====== */
+  --oneup-success:       #5a8a4a;       /* 暖绿（不要用纯绿） */
+  --oneup-warning:       #d4925a;       /* 暖琥珀 */
+  --oneup-error:         #b65a3e;       /* 暖砖红（不要用纯红） */
+
+  /* ====== 字体族 ====== */
+  --oneup-font-serif-en: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --oneup-font-serif-cn: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', serif;
+  --oneup-font-sans:     'Noto Sans SC', 'Source Han Sans SC', -apple-system,
+                         BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --oneup-font-mono:     'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace;
+
+  /* ====== 字号（基于 16px base） ====== */
+  --oneup-text-xs:    0.75rem;     /* 12px - 标签、备案号 */
+  --oneup-text-sm:    0.85rem;     /* 13.6px - 装饰英文、case-meta */
+  --oneup-text-base:  1rem;        /* 16px - 正文 */
+  --oneup-text-md:    1.05rem;     /* 17px - 强调正文 */
+  --oneup-text-lg:    1.2rem;      /* 19px - 引用块 */
+  --oneup-text-xl:    1.4rem;      /* 22px - h3 副标题 */
+  --oneup-text-2xl:   1.8rem;      /* 29px - 项目卡片标题 */
+  --oneup-text-3xl:   2.2rem;      /* 35px - 创始人名字 */
+  --oneup-text-4xl:   2.4rem;      /* 38px - section h2 */
+  --oneup-text-hero:  clamp(2.4rem, 4.5vw, 3.8rem);  /* 38-61px - hero h1 */
+
+  /* ====== 字重 ====== */
+  --oneup-weight-light:   300;
+  --oneup-weight-normal:  400;
+  --oneup-weight-medium:  500;
+  --oneup-weight-bold:    700;
+
+  /* ====== 字间距（中文标题用宽字距更有"院校感"） ====== */
+  --oneup-tracking-tight:  -0.5px;
+  --oneup-tracking-normal: 0;
+  --oneup-tracking-wide:   1px;
+  --oneup-tracking-wider:  2px;       /* 中等小标题 */
+  --oneup-tracking-widest: 4px;       /* 大标题、section h2 */
+  --oneup-tracking-mega:   5px;       /* hero 装饰小字 */
+
+  /* ====== 行高 ====== */
+  --oneup-leading-tight:   1.2;       /* hero h1 */
+  --oneup-leading-snug:    1.4;       /* 案例标题 */
+  --oneup-leading-normal:  1.6;       /* 副标题 */
+  --oneup-leading-relaxed: 1.8;       /* body 正文 */
+  --oneup-leading-loose:   2;         /* 描述段落、深度阅读 */
+
+  /* ====== 间距（基于 8px 网格） ====== */
+  --oneup-space-1:   4px;
+  --oneup-space-2:   8px;
+  --oneup-space-3:   12px;
+  --oneup-space-4:   16px;
+  --oneup-space-5:   20px;
+  --oneup-space-6:   24px;
+  --oneup-space-8:   32px;
+  --oneup-space-10:  40px;
+  --oneup-space-12:  48px;
+  --oneup-space-16:  64px;
+  --oneup-space-20:  80px;
+  --oneup-space-24:  96px;
+  --oneup-space-28:  112px;          /* section vertical padding */
+
+  /* ====== 容器宽度 ====== */
+  --oneup-container-max: 1200px;
+  --oneup-content-max:   720px;       /* 长文阅读 */
+
+  /* ====== 圆角（基线版几乎不用圆角，保持"学院感"） ====== */
+  --oneup-radius-none:   0;
+  --oneup-radius-sm:     2px;
+  --oneup-radius-md:     4px;
+  --oneup-radius-lg:     8px;
+  --oneup-radius-full:   9999px;
+
+  /* ====== 边框 ====== */
+  --oneup-border-thin:   1px solid var(--oneup-border);
+  --oneup-border-orange: 1px solid var(--oneup-orange);
+  --oneup-border-double: 4px double var(--oneup-orange-line);   /* 案例图片招牌边框 */
+
+  /* ====== 阴影（基线版用得很少，保持平面） ====== */
+  --oneup-shadow-sm:  0 4px 12px rgba(45, 24, 16, 0.04);
+  --oneup-shadow-md:  0 10px 30px rgba(45, 24, 16, 0.06);
+  --oneup-shadow-lg:  0 10px 40px rgba(45, 24, 16, 0.08);
+
+  /* ====== 动效 ====== */
+  --oneup-duration-fast:    0.2s;
+  --oneup-duration-normal:  0.3s;
+  --oneup-duration-slow:    1s;        /* fade-up 滚动渐入 */
+  --oneup-easing-default:   ease-out;
+  --oneup-easing-snappy:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+ * 暗色模式（可选 · 占位，不强制实现）
+ * ============================================================ */
+@media (prefers-color-scheme: dark) {
+  /*
+   * 注：基线版本是浅色暖调，暗色模式实现需另行设计。
+   * 暂时保持浅色不变，避免不一致。
+   */
+}

@@ -6,8 +6,8 @@
     "url": "https://github.com/weizunwhite"
   },
   "metadata": {
-    "description": "零一优创（One Up）青少年科技创新教育插件市场 — 竞赛材料生成 + 硬件开发工具集",
-    "version": "1.0.0"
+    "description": "零一优创（One Up）青少年科技创新教育插件市场 — 竞赛材料生成 + 硬件开发工具集 + 品牌设计系统",
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -25,6 +25,14 @@
       "version": "1.0.0",
       "category": "hardware",
       "keywords": ["arduino", "esp32", "platformio", "firmware", "iot", "embedded", "mixly"]
+    },
+    {
+      "name": "oneup-design",
+      "source": "./oneup-design",
+      "description": "零一优创品牌视觉规范与设计系统：颜色 token、字体规则、组件样例、文案语气、真实项目数据库。开发任何 OneUp 网站、UI、PPT、营销物料前必读。",
+      "version": "1.0.0",
+      "category": "design",
+      "keywords": ["design-system", "brand", "visual-identity", "tokens", "oneup"]
     }
   ]
 }

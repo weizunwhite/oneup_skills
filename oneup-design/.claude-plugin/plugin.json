@@ -1,0 +1,14 @@
+{
+  "name": "oneup-design",
+  "version": "1.0.0",
+  "description": "零一优创品牌视觉规范与设计系统 — 颜色、字体、组件、文案语气",
+  "author": {
+    "name": "Wei (One Up)",
+    "email": "wei704102871@gmail.com",
+    "url": "https://github.com/weizunwhite"
+  },
+  "homepage": "https://github.com/weizunwhite/oneup_skills",
+  "repository": "https://github.com/weizunwhite/oneup_skills",
+  "license": "MIT",
+  "keywords": ["design-system", "brand", "visual-identity", "oneup", "tokens"]
+}

@@ -14,7 +14,8 @@
 | `skills/oneup-design-system/SKILL.md` | 给 AI 看的规范文档（核心） |
 | `skills/oneup-design-system/tokens/tokens.css` | CSS 变量，可直接 `@import` |
 | `skills/oneup-design-system/tokens/tokens.json` | JSON tokens，给 Tailwind / Sanity 等工具消费 |
-| `skills/oneup-design-system/references/oneup-baseline.html` | 基线 HTML 实现，**视觉对照标准** |
+| `skills/oneup-design-system/references/themes/warm-baseline.html` | ⭐ 默认主题（暖色版），**视觉对照标准** |
+| `skills/oneup-design-system/references/themes/neo-brutalism-alt.html` | 备选主题（粗野风），仅明确指示时使用 |
 | `skills/oneup-design-system/references/real-projects.md` | 真实学生项目数据库 |
 
 ## 设计基线一览

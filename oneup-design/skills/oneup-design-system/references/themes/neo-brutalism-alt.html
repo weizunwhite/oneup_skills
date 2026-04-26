@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零一优创 - 动手造万物</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #fdfaf6;
+            --text: #111111;
+            --border-width: 4px;
+            --border-color: #111111;
+            --shadow: 8px 8px 0px #111111;
+            --shadow-sm: 4px 4px 0px #111111;
+            
+            --yellow: #FFC900;
+            --pink: #FF90E8;
+            --blue: #38DBFF;
+            --green: #00E676;
+            
+            --font-main: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            overflow-x: hidden;
+        }
+
+        /* 动画 */
+        .pop-in { opacity: 0; transform: scale(0.9) translateY(20px); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .pop-in.active { opacity: 1; transform: scale(1) translateY(0); }
+
+        /* 组件：硬核卡片 */
+        .brutal-card {
+            background: white;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow);
+            border-radius: 16px;
+            padding: 40px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .brutal-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--border-color);
+        }
+
+        /* 组件：硬核按钮 */
+        .brutal-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 16px 32px;
+            background: var(--yellow);
+            color: var(--text);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.1s;
+        }
+        .brutal-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border-color);
+        }
+        .brutal-btn.pink { background: var(--pink); }
+        .brutal-btn.blue { background: var(--blue); }
+
+        /* 导航 */
+        nav {
+            position: fixed; top: 20px; left: 5%; right: 5%; z-index: 100;
+            background: var(--bg);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            border-radius: 16px;
+            padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
+        .logo-box { width: 32px; height: 32px; background: var(--text); display: inline-block; border-radius: 6px; position: relative; }
+        .logo-box::after { content: ''; position: absolute; top: -6px; left: -6px; width: 100%; height: 100%; border: 3px solid var(--text); border-radius: 6px; }
+        .nav-links { display: flex; gap: 20px; font-weight: 600; }
+        .nav-links a { color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: 0.2s; }
+        .nav-links a:hover { border-bottom-color: var(--pink); }
+
+        /* 布局 */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 100px 0; }
+        
+        .section-title {
+            display: inline-block;
+            font-size: 3rem; font-weight: 900;
+            background: var(--green);
+            padding: 10px 20px;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            border-radius: 12px;
+            margin-bottom: 60px;
+            transform: rotate(-2deg);
+        }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-title { font-size: clamp(3.5rem, 5vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; }
+        .hero-title span { display: inline-block; background: var(--blue); padding: 0 10px; border-radius: 8px; border: var(--border-width) solid var(--border-color); }
+        .hero-desc { font-size: 1.25rem; font-weight: 600; margin-bottom: 40px; line-height: 1.6; max-width: 500px; }
+        .hero-image { background: var(--pink); border: var(--border-width) solid var(--border-color); box-shadow: var(--shadow); border-radius: 24px; aspect-ratio: 4/3; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; filter: contrast(1.2); }
+        .badge-float { position: absolute; top: -20px; right: -20px; background: var(--yellow); padding: 20px; border-radius: 50%; border: var(--border-width) solid var(--border-color); font-weight: 900; font-size: 1.2rem; transform: rotate(15deg); box-shadow: var(--shadow-sm); z-index: 2; width: 120px; height: 120px; display: flex; text-align: center; align-items: center; justify-content: center; }
+
+        /* 理念 */
+        .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .phil-card h3 { font-size: 1.8rem; margin: 20px 0; }
+        .phil-card:nth-child(1) { background: var(--pink); }
+        .phil-card:nth-child(2) { background: var(--yellow); }
+        .phil-card:nth-child(3) { background: var(--blue); }
+
+        /* 项目 */
+        .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .proj-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+        .proj-img { height: 300px; border-bottom: var(--border-width) solid var(--border-color); background: #eee; }
+        .proj-img img { width: 100%; height: 100%; object-fit: cover; }
+        .proj-content { padding: 30px; background: white; flex: 1; }
+        .proj-tags { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tag { padding: 6px 12px; border: 2px solid var(--border-color); border-radius: 8px; font-weight: 700; font-size: 0.85rem; box-shadow: 2px 2px 0px var(--border-color); }
+
+        /* 课程与资源 */
+        .resources-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+        .res-list { display: flex; flex-direction: column; gap: 20px; }
+        .res-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: white; border: var(--border-width) solid var(--border-color); border-radius: 12px; font-weight: 700; box-shadow: var(--shadow-sm); cursor: pointer; transition: 0.2s; }
+        .res-item:hover { transform: translateX(10px); background: var(--yellow); }
+
+        /* 创始人 & CTA */
+        .founder-box { display: flex; gap: 40px; align-items: center; background: white; }
+        .founder-avatar { width: 150px; height: 150px; border-radius: 50%; border: var(--border-width) solid var(--border-color); box-shadow: var(--shadow-sm); background: #ccc; flex-shrink: 0; overflow: hidden; }
+        
+        .cta-banner { background: var(--text); color: white; border: var(--border-width) solid var(--text); margin-top: 50px; text-align: center; }
+        .cta-banner h2 { font-size: 3rem; margin-bottom: 20px; }
+
+        @media (max-width: 900px) {
+            .hero-grid, .philosophy-grid, .projects-grid, .resources-grid, .founder-box { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .badge-float { display: none; }
+            .founder-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="logo-box"></div>
+            ONE UP.
+        </div>
+        <div class="nav-links">
+            <a href="#philosophy">核心理念</a>
+            <a href="#projects">项目库</a>
+            <a href="#resources">开源资源</a>
+        </div>
+        <a href="#" class="brutal-btn pink" style="padding: 10px 20px; font-size: 1rem;">
+            立即咨询 <i data-lucide="arrow-right"></i>
+        </a>
+    </nav>
+
+    <div class="container">
+        <section class="hero pop-in">
+            <div class="hero-grid">
+                <div>
+                    <h1 class="hero-title">动手造万物，<br><span>AI 做副手。</span></h1>
+                    <p class="hero-desc">我们指导 1-9 年级学生，从零构建真实的软硬件硬核作品。拒绝玩具，拒绝代做，冲击「青创赛」与「金鹏论坛」。</p>
+                    <div style="display: flex; gap: 20px;">
+                        <button class="brutal-btn">作品集评估</button>
+                        <button class="brutal-btn blue" style="background: white;"><i data-lucide="play"></i> 观看往期项目</button>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div class="badge-float">100%<br>原创</div>
+                    <div class="hero-image">
+                        <img src="https://picsum.photos/seed/maker1/800/600" alt="Student coding">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="pop-in">
+            <h2 class="section-title">WHY US?</h2>
+            <div class="philosophy-grid">
+                <div class="brutal-card phil-card">
+                    <div style="width: 60px; height: 60px; background: white; border: 3px solid #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900;">01</div>
+                    <h3>绝对主权</h3>
+                    <p style="font-weight: 600;">代码自己敲，板子自己焊。老师只提供技术栈指引与避坑指南。唯有历经痛苦的 Debug，答辩时才能无懈可击。</p>
+                </div>
+                <div class="brutal-card phil-card">
+                    <div style="width: 60px; height: 60px; background: white; border: 3px solid #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900;">02</div>
+                    <h3>AI 赋能</h3>
+                    <p style="font-weight: 600;">将 Cursor 和 ChatGPT 纳入常规武器库。教孩子掌握 Prompt Engineering，让 AI 成为他们创造世界的杠杆。</p>
+                </div>
+                <div class="brutal-card phil-card">
+                    <div style="width: 60px; height: 60px; background: white; border: 3px solid #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900;">03</div>
+                    <h3>真实赛场</h3>
+                    <p style="font-weight: 600;">瞄准全国青少年科技创新大赛等高含金量白名单赛事。解决真实社会痛点，用硬实力敲开升学大门。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="pop-in">
+            <h2 class="section-title" style="background: var(--pink); transform: rotate(1deg);">STUDENT WORKS</h2>
+            <div class="projects-grid">
+                <div class="brutal-card proj-card">
+                    <div class="proj-img">
+                        <img src="https://picsum.photos/seed/medicine-cabinet/800/600" alt="医院自动取药系统">
+                    </div>
+                    <div class="proj-content">
+                        <div class="proj-tags">
+                            <span class="tag" style="background: var(--green);">初中组</span>
+                            <span class="tag" style="background: white;">边缘 AI</span>
+                        </div>
+                        <h3 style="font-size: 2rem; margin-bottom: 10px;">医院自动取药系统</h3>
+                        <p style="font-weight: 600;">行空板 + ESP32 双控制器，本地 ONNX 模型推理，XY 滑台精确定位 — 4 个月做出来的。</p>
+                    </div>
+                </div>
+                <div class="brutal-card proj-card">
+                    <div class="proj-img">
+                        <img src="https://picsum.photos/seed/water-monitor/800/600" alt="独居老人用水监测">
+                    </div>
+                    <div class="proj-content">
+                        <div class="proj-tags">
+                            <span class="tag" style="background: var(--blue);">4年级</span>
+                            <span class="tag" style="background: white;">公益关怀</span>
+                        </div>
+                        <h3 style="font-size: 2rem; margin-bottom: 10px;">独居老人用水监测</h3>
+                        <p style="font-weight: 600;">通过水龙头使用频率推断老人是否安全 — 孙子写给爷爷奶奶的一行代码。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="pop-in">
+            <h2 class="section-title" style="background: var(--yellow);">FREE TOOLKIT</h2>
+            <div class="resources-grid">
+                <div class="brutal-card" style="background: var(--blue);">
+                    <div class="tag" style="background: white; display: inline-block; margin-bottom: 20px;">公益翻译计划</div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 20px;">MIT Day of AI <br>全套中文课程</h3>
+                    <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 30px;">我们引进并本土化了麻省理工学院专为中小学设计的顶级 AI 启蒙课，包含教案与互动工具，无门槛向社会开源。</p>
+                    <button class="brutal-btn" style="background: white;">获取课件包 <i data-lucide="download"></i></button>
+                </div>
+                <div class="res-list">
+                    <div class="res-item">
+                        <div>
+                            <div style="font-size: 1.2rem; margin-bottom: 4px;">Cursor 极简配置</div>
+                            <div style="color: #666; font-size: 0.9rem;">为低龄学生定制的环境脚本</div>
+                        </div>
+                        <i data-lucide="external-link"></i>
+                    </div>
+                    <div class="res-item">
+                        <div>
+                            <div style="font-size: 1.2rem; margin-bottom: 4px;">Wei 的 API 面板</div>
+                            <div style="color: #666; font-size: 0.9rem;">聚合主流大模型调用接口</div>
+                        </div>
+                        <i data-lucide="external-link"></i>
+                    </div>
+                    <div class="res-item">
+                        <div>
+                            <div style="font-size: 1.2rem; margin-bottom: 4px;">科创硬件采购单</div>
+                            <div style="color: #666; font-size: 0.9rem;">避坑指南与高性价比推荐</div>
+                        </div>
+                        <i data-lucide="external-link"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pop-in">
+            <div class="brutal-card founder-box">
+                <div class="founder-avatar">
+                    <img src="https://picsum.photos/seed/wei2/300/300" alt="Wei" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(1);">
+                </div>
+                <div>
+                    <div class="tag" style="background: var(--green); display: inline-block; margin-bottom: 10px;">FOUNDER</div>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 10px;">Wei</h3>
+                    <p style="font-weight: 600; font-size: 1.1rem; line-height: 1.6;">零一优创创始人。多年扎根青少年科创教育一线，亲手指导过几十个学生作品落地。坚持一个朴素信念：教育不是替孩子扫清障碍，而是让他们自己学会跨越障碍 — 在这个过程中，AI 是最好的副手。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="brutal-card cta-banner pop-in" style="margin-bottom: 100px;">
+            <h2>准备好开启创客之旅了吗？</h2>
+            <p style="font-weight: 600; font-size: 1.2rem; margin-bottom: 30px;">添加微信，获取免费的一对一科创课题规划方案。</p>
+            <button class="brutal-btn pink" style="font-size: 1.5rem; padding: 20px 40px;">
+                <i data-lucide="message-circle"></i> 预约Wei导师咨询
+            </button>
+        </section>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.pop-in').forEach(elem => observer.observe(elem));
+    </script>
+</body>
+</html>

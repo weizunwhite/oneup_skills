@@ -1,13 +1,25 @@
 ---
 name: oneup-design-system
-description: 零一优创（One Up）官方品牌视觉规范。用于在为 One Up 公司开发任何前端界面、网站、UI 组件、营销物料、PPT 模板、PDF 报告封面、品牌图形时遵守统一的视觉语言。包含完整的颜色 token、字体、间距、组件样例、文案语气规则。触发于 "OneUp 网站""零一优创界面""设计稿""design system""品牌色""品牌字体""官网组件""营销页"等关键词，或当用户在 oneup-website / oneup-platform 项目中要求实现任何 UI。
+description: 零一优创（One Up）官方品牌视觉规范。用于在为 One Up 公司开发任何前端界面、网站、UI 组件、营销物料、PPT 模板、PDF 报告封面、品牌图形时遵守统一的视觉语言。包含完整的颜色 token、字体、间距、组件样例、文案语气规则。默认主题为 warm-baseline（暖色）；备选主题 neo-brutalism-alt 仅在用户明确要求"反叛""极客""年轻态"风格时使用。触发于 "OneUp 网站""零一优创界面""设计稿""design system""品牌色""品牌字体""官网组件""营销页"等关键词，或当用户在 oneup-website / oneup-platform 项目中要求实现任何 UI。
 ---
 
 # OneUp Design System — 零一优创视觉规范 v1.0.0
 
 > 本规范是零一优创（One Up）所有面向外部的视觉物料的**唯一标准**。
 > 任何为 One Up 开发的前端代码、UI 组件、品牌物料，**必须**遵循本规范。
-> 基线参考：`references/oneup-baseline.html`（暖色版）
+
+## 主题选择（重要）
+
+本设计系统提供 **2 个主题**：
+
+| 主题 | 文件 | 默认/备选 | 适用场景 |
+|------|------|----------|---------|
+| **warm-baseline**（暖色基线） | `references/themes/warm-baseline.html` | ⭐ **默认** | 公司官网、家长营销页、PPT、研究报告封面、所有正式对外物料 |
+| **neo-brutalism-alt**（粗野风备选） | `references/themes/neo-brutalism-alt.html` | 备选 | 极客向内部工具、开发者文档站、学生作品集（可选）、不面向家长的页面 |
+
+**默认行为**：除非用户明确说"用反叛风格""粗野风格""kuangye"或类似关键词，**总是使用 warm-baseline**。
+
+下面所有的 token、组件、文案规则都基于 **warm-baseline 主题**。备选主题有自己的视觉语言，详见 `references/themes/neo-brutalism-alt.html` —— 它使用黑色粗边框 + 高饱和度色块 + 硬阴影 + Space Grotesk 字体，但**文案语气和真实项目数据规则完全相同**（不能编造占位项目，不能写"申请名校"等装腔语）。
 
 ## 调性总结（必读）
 
@@ -260,7 +272,8 @@ description: 零一优创（One Up）官方品牌视觉规范。用于在为 One
 
 ## 十、引用
 
-- 基线 HTML 完整代码：[references/oneup-baseline.html](references/oneup-baseline.html)
+- 默认主题 HTML（warm-baseline）：[references/themes/warm-baseline.html](references/themes/warm-baseline.html)
+- 备选主题 HTML（neo-brutalism-alt）：[references/themes/neo-brutalism-alt.html](references/themes/neo-brutalism-alt.html)
 - CSS 变量：[tokens/tokens.css](tokens/tokens.css)
 - JSON tokens：[tokens/tokens.json](tokens/tokens.json)
 - 真实学生项目数据：[references/real-projects.md](references/real-projects.md)

@@ -77,8 +77,8 @@ description: 零一优创（One Up）官方品牌视觉规范。用于在为 One
 |------|------|
 | 中文标题（h1/h2/h3） | `Noto Serif SC`（思源宋体） |
 | 中文正文 | `Noto Sans SC`（思源黑体） |
-| 英文装饰（Hero tag、section eyebrow） | `Cormorant Garamond` 斜体 |
-| 数字（统计数据） | `Cormorant Garamond` 加粗 |
+| 英文装饰（Hero tag、section eyebrow） | `EB Garamond（罗马衬线）` 斜体 |
+| 数字（统计数据） | `EB Garamond（罗马衬线）` 加粗 |
 | 代码 | `JetBrains Mono` |
 
 **核心原则**：中文宋体 + 英文 Garamond 斜体 = 学院感 + 温度。
@@ -251,7 +251,7 @@ description: 零一优创（One Up）官方品牌视觉规范。用于在为 One
 ### 场景 3：做 PPT / PDF / 营销图
 1. 按颜色 token 设置
 2. 中文字体用思源宋体（标题）+ 思源黑体（正文）
-3. 装饰用 Cormorant Garamond 斜体小字
+3. 装饰用 EB Garamond（罗马衬线） 斜体小字
 
 ### 场景 4：用户问"OneUp 的品牌色是什么？"
 直接回答：

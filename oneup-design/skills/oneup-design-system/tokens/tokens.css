@@ -34,7 +34,8 @@
   --oneup-error:         #b65a3e;       /* 暖砖红（不要用纯红） */
 
   /* ====== 字体族 ====== */
-  --oneup-font-serif-en: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  /* 英文 + 数字统一使用罗马衬线字体（EB Garamond），数字稳重工整 */
+  --oneup-font-serif-en: 'EB Garamond', 'Cormorant Garamond', 'Garamond', 'Times New Roman', Georgia, serif;
   --oneup-font-serif-cn: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', serif;
   --oneup-font-sans:     'Noto Sans SC', 'Source Han Sans SC', -apple-system,
                          BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
